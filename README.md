@@ -1,3 +1,5 @@
+https://awesomeopensource.com/project/qianguyihao/Web
+
 # help-SQL
 
 ---
@@ -47,16 +49,16 @@ gebruik qianguyihao_database;
 **Controleer in de huidige database welke tabellen er zijn**:
 
 ``` sql
-toon tabellen;
+SHOW tables;
 ```
 
 **In de huidige database alle gegevens van de opgegeven tabel opvragen**:
 
 ``` sql
-SELECTEER * VANUIT xxx_table;
+SELECTEER * FROM xxx_table;
 
 # Voorbeeld
-SELECTEER * VAN qianguyihao_student_table
+SELECTEER * FROM qianguyihao_student_table
 ```
 
 **Verwijder de opgegeven tabel**:
@@ -87,7 +89,7 @@ Gebruik de `where`-component om de gegevens in de tabel te filteren, en rijen me
 Het syntaxisformaat is als volgt:
 
 ``` sql
-SELECT * FROM tabelnaam waar voorwaarde;
+SELECT * FROM tabelnaam WHERE voorwaarde;
 ```
 
 Hoe schrijf je in het bovenstaande grammaticale formaat specifiek 'voorwaarde'? Hiervoor kunnen veel situaties zijn. Laten we verder lezen.
@@ -106,22 +108,22 @@ Hoe schrijf je in het bovenstaande grammaticale formaat specifiek 'voorwaarde'? 
 
 ``` sql
 # Vraag gegevens op waarvan de leeftijd groter is dan 20
-SELECTEER * VAN qianguyihao_table WAAR leeftijd> 20;
+SELECTEER * VAN qianguyihao_table WHERE leeftijd> 20;
 ```
 
 ### Logische operators
 
--EN
+-AND
 
--OF
+-OR
 
--NIET
+-NOT
 
 **Voorbeeld**:
 
 ``` sql
 # Vraag de gegevens op van leeftijd tussen 20 en 30
-SELECTEER * VAN qianguyihao_table WAAR leeftijd TUSSEN 20 EN 30;
+SELECTEER * VAN qianguyihao_table WHERE leeftijd TUSSEN 20 EN 30;
 
 ```
 
@@ -129,15 +131,15 @@ SELECTEER * VAN qianguyihao_table WAAR leeftijd TUSSEN 20 EN 30;
 
 -'in' betekent in een niet-continu bereik.
 
--`tussen ... en ...` betekent in een continu bereik
+-`tussen ... AND ...` betekent in een continu bereik
 
 Bijvoorbeeld:
 
 ``` sql
 # Vraag de gegevens op waarvan de naam Qiangu One of Xu Song is
-SELECTEER * VAN qianguyihao_table WAAR naam IN ['Qianguyihao','Xu Song'];
+SELECTEER * FROM qianguyihao_table WHERE naam IN ['Qianguyihao','Xu Song'];
 
-SELECTEER * VAN qianguyihao_table WAAR leeftijd TUSSEN 20 EN 30;
+SELECTEER * FROM qianguyihao_table WHERE leeftijd BETWEEN 20 AND 30;
 ```
 
 ### Vage vraag
@@ -150,10 +152,10 @@ Voorbeelden van `%`-symbolen:
 
 ``` sql
 # Querygegevens die de twee woorden "front end" in de titel bevatten (er kan inhoud zijn voor en na de twee woorden "front end")
-selecteer * van qianguyihao_table waar `title` zoals "%Frontend%";
+selecteer * van qianguyihao_table WHERE `title` zoals "%Frontend%";
 
 # Vraag de gegevens op waarvan de titel begint met "Front End"
-selecteer * van qianguyihao_table waar `title` zoals "Frontend%";
+selecteer * van qianguyihao_table WHERE `title` zoals "Frontend%";
 
 ```
 
@@ -161,7 +163,7 @@ Voorbeelden van `_` symbolen:
 
 ``` sql
 # Zoek in de titel, de zoekvoorwaarde is: er zijn ten minste vijf tekens in de titel en van deze vijf tekens moeten de eerste twee tekens beginnen met "Qiangu".
-SELECTEER * VAN qianguyihao_table WAAR `titel` ZOALS "千古___";
+SELECTEER * VAN qianguyihao_table WHERE `titel` ZOALS "千古___";
 ```
 
 ### NULL oordeel
@@ -175,7 +177,7 @@ Merk op dat er een verschil is tussen `is null` en **lege string**`""`. Nadat je
 Bijvoorbeeld:
 
 ``` sql
-selecteer * van qianguyihao_table waar naam niet NULL is;
+selecteer * FROM qianguyihao_table WHERE naam niet NULL is;
 
 ```
 
@@ -236,7 +238,7 @@ De bovenstaande query is zinloos omdat er geen queryvoorwaarde is toegevoegd.
 **Situatie 1**: (binnenste verbinding)
 
 ``` sql
-SELECTEER * VAN auteur INNERLIJKE WORD LID VAN boek OP author.authorId = book.authorId;
+SELECTEER * FROM auteur INNERLIJKE WORD LID VAN boek ON author.authorId = book.authorId;
 ```
 
 zoekresultaat:
@@ -247,13 +249,13 @@ zoekresultaat:
 De bovenstaande opdracht is gelijk aan de volgende opdracht:
 
 ``` sql
-SELECTEER * VAN auteur, boek WAAR author.authorId = boek.authorId;
+SELECTEER * FROM auteur, boek WHERE author.authorId = boek.authorId;
 ```
 
 **Situatie 2**: (linker join)
 
 ``` sql
-SELECTEER * VAN auteur LEFT JOIN boek ON author.authorId = book.authorId;
+SELECTEER * FROM auteur LEFT JOIN boek ON author.authorId = book.authorId;
 ```
 
 zoekresultaat:
@@ -263,7 +265,7 @@ zoekresultaat:
 **Situatie 3**: (rechter aansluiting)
 
 ``` sql
-SELECTEER * VAN auteur RECHTS WORD LID VAN boek OP author.authorId = book.authorId;
+SELECTEER * FROM auteur RECHTS WORD LID FROM boek ON author.authorId = book.authorId;
 ```
 
 zoekresultaat:
